@@ -1,0 +1,19 @@
+{
+  "name": "weather-app",
+  "version": "1.0.0",
+  "description": "Provides weather info on different locations",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kidusmw/Weather-app.git"
+  },
+  "author": "Kidus Maru",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kidusmw/Weather-app/issues"
+  },
+  "homepage": "https://github.com/kidusmw/Weather-app#readme"
+}

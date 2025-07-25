@@ -8,6 +8,8 @@ import { useWeatherAPI } from './hooks/useWeatherAPI';
 function App() {
   const [query, setQuery] = useState('');
   const [searchTrigger, setSearchTrigger] = useState(0);
+  const [demoMode, setDemoMode] = useState(true);
+  const [demoData, setDemoData] = useState(null);
   const { weatherData, loading, error, fetchWeather } = useWeatherAPI();
 
   // Debounced search function

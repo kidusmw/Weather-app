@@ -87,19 +87,21 @@ export const useWeatherAPI = () => {
       }
 
       if (shouldUseFallback) {
-        // Use demo data as fallback
+        // Use demo data as fallback with weather variation
+        const weatherTypes = ['Clear', 'Clouds', 'Rain', 'Mist'];
+        const randomWeather = weatherTypes[Math.floor(Math.random() * weatherTypes.length)];
         const demoData = {
           name: city || 'Demo City',
           main: {
-            temp: 22,
-            humidity: 65
+            temp: Math.floor(Math.random() * 25) + 5, // 5-30°C
+            humidity: Math.floor(Math.random() * 40) + 40 // 40-80%
           },
           weather: [{
-            main: 'Clear',
-            description: 'clear sky'
+            main: randomWeather,
+            description: randomWeather.toLowerCase() + ' sky'
           }],
           wind: {
-            speed: 3.5
+            speed: (Math.random() * 10 + 1).toFixed(1) // 1-11 km/h
           }
         };
         setWeatherData(demoData);

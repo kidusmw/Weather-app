@@ -1,19 +1,37 @@
 {
-	"name": "weather-app",
-	"version": "1.0.0",
-	"description": "Provides weather info on different locations",
-	"main": "node main.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/kidusmw/Weather-app.git"
-	},
-	"author": "Kidus Maru",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/kidusmw/Weather-app/issues"
-	},
-	"homepage": "https://github.com/kidusmw/Weather-app#readme"
+  "name": "weather-app-react",
+  "version": "1.0.0",
+  "description": "Futuristic weather app built with React and async/await patterns",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "dev": "react-scripts start"
+  },
+  "keywords": ["react", "weather", "futuristic", "async"],
+  "author": "Kidus Maru",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }

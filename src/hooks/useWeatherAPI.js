@@ -72,19 +72,42 @@ export const useWeatherAPI = () => {
 
       // Handle different types of errors
       let errorMessage = 'Unable to fetch weather data. Please try again later.';
+      let shouldUseFallback = false;
 
       if (err.name === 'TypeError' && err.message.includes('fetch')) {
-        errorMessage = 'Network connection failed. Please check your internet connection.';
+        errorMessage = 'API temporarily unavailable. Showing demo data.';
+        shouldUseFallback = true;
       } else if (err.status === 404) {
         errorMessage = 'City not found. Please check the spelling and try again.';
       } else if (err.status === 401) {
         errorMessage = 'API key error. Please check your configuration.';
       } else if (err.status >= 500) {
-        errorMessage = 'Weather service is temporarily unavailable. Please try again later.';
+        errorMessage = 'Weather service is temporarily unavailable. Showing demo data.';
+        shouldUseFallback = true;
       }
 
-      setError({ ...err, message: errorMessage });
-      setWeatherData(null);
+      if (shouldUseFallback) {
+        // Use demo data as fallback
+        const demoData = {
+          name: city || 'Demo City',
+          main: {
+            temp: 22,
+            humidity: 65
+          },
+          weather: [{
+            main: 'Clear',
+            description: 'clear sky'
+          }],
+          wind: {
+            speed: 3.5
+          }
+        };
+        setWeatherData(demoData);
+        setError({ message: errorMessage, isDemo: true });
+      } else {
+        setError({ ...err, message: errorMessage });
+        setWeatherData(null);
+      }
 
     } finally {
       setLoading(false);

@@ -86,6 +86,9 @@ export const useWeatherAPI = () => {
       if (err.name === 'TypeError' && err.message.includes('fetch')) {
         errorMessage = 'API temporarily unavailable. Showing demo data.';
         shouldUseFallback = true;
+      } else if (err.message === 'Request timeout') {
+        errorMessage = 'Request timed out. Showing demo data.';
+        shouldUseFallback = true;
       } else if (err.status === 404) {
         errorMessage = 'City not found. Please check the spelling and try again.';
       } else if (err.status === 401) {

@@ -1,7 +1,14 @@
 import { useState, useCallback, useRef } from 'react';
 
 const API_KEY = "ae0a4d1b1c6e89076b37a592e7937940";
-const API_URL = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+
+// Use proxy in development, direct API in production
+const getApiUrl = () => {
+  if (process.env.NODE_ENV === 'development') {
+    return '/api/weather?units=metric&q=';
+  }
+  return 'https://api.openweathermap.org/data/2.5/weather?units=metric&q=';
+};
 
 export const useWeatherAPI = () => {
   const [weatherData, setWeatherData] = useState(null);

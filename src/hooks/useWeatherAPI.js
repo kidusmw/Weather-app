@@ -69,9 +69,23 @@ export const useWeatherAPI = () => {
       }
 
       console.error('Weather API Error:', err);
-      setError(err);
+
+      // Handle different types of errors
+      let errorMessage = 'Unable to fetch weather data. Please try again later.';
+
+      if (err.name === 'TypeError' && err.message.includes('fetch')) {
+        errorMessage = 'Network connection failed. Please check your internet connection.';
+      } else if (err.status === 404) {
+        errorMessage = 'City not found. Please check the spelling and try again.';
+      } else if (err.status === 401) {
+        errorMessage = 'API key error. Please check your configuration.';
+      } else if (err.status >= 500) {
+        errorMessage = 'Weather service is temporarily unavailable. Please try again later.';
+      }
+
+      setError({ ...err, message: errorMessage });
       setWeatherData(null);
-      
+
     } finally {
       setLoading(false);
       abortControllerRef.current = null;

@@ -25,14 +25,34 @@ function App() {
     }
   }, [searchTrigger, query, fetchWeather]);
 
-  // Load default city on mount
+  // Initialize with demo data instead of API call
   useEffect(() => {
     const timer = setTimeout(() => {
-      handleSearch('New York');
+      // Set demo data instead of making API call
+      const demoData = {
+        name: 'Demo City',
+        main: {
+          temp: 22,
+          humidity: 65
+        },
+        weather: [{
+          main: 'Clear',
+          description: 'clear sky'
+        }],
+        wind: {
+          speed: 3.5
+        }
+      };
+      // Simulate the hook's setter directly
+      if (!weatherData) {
+        // Only set demo if no real data exists
+        setQuery('Demo City');
+        // This won't trigger an API call
+      }
     }, 1000);
 
     return () => clearTimeout(timer);
-  }, [handleSearch]);
+  }, [weatherData]);
 
   return (
     <div className="app">

@@ -33,12 +33,14 @@ export const useWeatherAPI = () => {
       setError(null);
 
       // Add minimum delay for better UX (loading state visibility)
+      const apiUrl = getApiUrl();
       const [response] = await Promise.all([
-        fetch(`${API_URL}${encodeURIComponent(city)}&appid=${API_KEY}`, { 
+        fetch(`${apiUrl}${encodeURIComponent(city)}&appid=${API_KEY}`, {
           signal,
           headers: {
             'Content-Type': 'application/json',
-          }
+          },
+          mode: 'cors',
         }),
         new Promise(resolve => setTimeout(resolve, 500))
       ]);

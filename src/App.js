@@ -12,10 +12,11 @@ function App() {
   const [demoData, setDemoData] = useState(null);
   const { weatherData, loading, error, fetchWeather } = useWeatherAPI();
 
-  // Debounced search function
+  // Search function with demo fallback
   const handleSearch = useCallback(async (cityName) => {
     if (!cityName.trim()) return;
-    
+
+    setDemoMode(false);
     setQuery(cityName);
     setSearchTrigger(prev => prev + 1);
   }, []);

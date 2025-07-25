@@ -52,23 +52,43 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
+  // Determine what data to show
+  const displayData = demoMode ? demoData : weatherData;
+  const showError = !!error && !loading && !demoMode;
+  const showWeather = (!!displayData && (!error || demoMode)) && !loading;
+
   return (
     <div className="app">
       <div className="card">
-        <SearchBox 
+        <SearchBox
           onSearch={handleSearch}
           loading={loading}
         />
-        
-        <ErrorMessage 
+
+        {demoMode && demoData && (
+          <div className="demo-notice" style={{
+            background: 'rgba(59, 130, 246, 0.1)',
+            border: '1px solid rgba(59, 130, 246, 0.3)',
+            borderRadius: '12px',
+            padding: '12px 16px',
+            margin: '16px 0',
+            fontSize: '14px',
+            color: '#93c5fd',
+            textAlign: 'center'
+          }}>
+            ℹ Demo mode - Search for a city to get live weather data
+          </div>
+        )}
+
+        <ErrorMessage
           error={error}
-          show={!!error && !loading}
+          show={showError}
         />
-        
-        <WeatherDisplay 
-          weatherData={weatherData}
+
+        <WeatherDisplay
+          weatherData={displayData}
           loading={loading}
-          show={!!weatherData && !error}
+          show={showWeather}
         />
       </div>
     </div>

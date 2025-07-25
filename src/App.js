@@ -28,12 +28,11 @@ function App() {
     }
   }, [searchTrigger, query, fetchWeather]);
 
-  // Initialize with demo data instead of API call
+  // Initialize with demo data
   useEffect(() => {
     const timer = setTimeout(() => {
-      // Set demo data instead of making API call
-      const demoData = {
-        name: 'Demo City',
+      const initialDemoData = {
+        name: 'New York',
         main: {
           temp: 22,
           humidity: 65
@@ -46,16 +45,12 @@ function App() {
           speed: 3.5
         }
       };
-      // Simulate the hook's setter directly
-      if (!weatherData) {
-        // Only set demo if no real data exists
-        setQuery('Demo City');
-        // This won't trigger an API call
-      }
+      setDemoData(initialDemoData);
+      setQuery('New York');
     }, 1000);
 
     return () => clearTimeout(timer);
-  }, [weatherData]);
+  }, []);
 
   return (
     <div className="app">
